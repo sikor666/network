@@ -15,15 +15,16 @@ file(GLOB_RECURSE SRC_COMMON
     "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.*"
 )
 
+file(GLOB_RECURSE SRC_SYSTEM
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/system/*.*"
+)
+
 # Add the executable
-add_executable(checkopts src/checkopts.cpp
-                         src/winsock.cpp
-                         src/wrapsock.cpp
-                         src/error.cpp
-                         ${SRC_COMMON})
+add_executable(checkopts src/checkopts.cpp ${SRC_COMMON} ${SRC_SYSTEM})
 
 # Add source groups in project
 source_group("common" FILES ${SRC_COMMON})
+source_group("system" FILES ${SRC_SYSTEM})
 
 # Add link libraries
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")

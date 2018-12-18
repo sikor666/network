@@ -3,8 +3,6 @@
 #include	<stdarg.h>		/* ANSI C header file */
 #include	<syslog.h>		/* for syslog() */
 
-#include <cstdio>
-
 int		daemon_proc;		/* set nonzero by daemon_init() */
 
 static void	err_doit(int, int, const char *, va_list);

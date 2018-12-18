@@ -20,3 +20,12 @@ void clean()
     WSACleanup();
 #endif
 }
+
+int error()
+{
+#if defined _WIN32
+    return WSAGetLastError();
+#else
+    return 0;
+#endif
+}

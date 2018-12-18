@@ -2,8 +2,6 @@
 /* *INDENT-OFF* */
 #include	"unp.h"
 
-#include <cstdio>
-
 union val {
   int				i_val;
   long				l_val;
@@ -125,7 +123,7 @@ main(int argc, char **argv)
 			len = sizeof(val);
 			if (getsockopt(fd, ptr->opt_level, ptr->opt_name,
 						   (char *)&val, &len) == -1) {
-				err_ret("getsockopt error");
+				err_ret("getsockopt error: %d", error());
 			} else {
 				printf("default = %s\n", (*ptr->opt_val_str)(&val, len));
 			}

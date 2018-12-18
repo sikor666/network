@@ -4,6 +4,9 @@
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
 #include <afunix.h>
+
+#include <cstdio>
+
 #define bzero(ptr,n)        memset(ptr, 0, n)
 #define close               closesocket
 #define ssize_t             size_t
@@ -34,3 +37,4 @@ void	 err_sys(const char *, ...);
 // Winsock
 void init();
 void clean();
+int error();
