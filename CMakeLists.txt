@@ -21,6 +21,7 @@ file(GLOB_RECURSE SRC_SYSTEM
 
 # Add the executable
 add_executable(checkopts src/checkopts.cpp ${SRC_COMMON} ${SRC_SYSTEM})
+add_executable(byteorder src/byteorder.cpp ${SRC_COMMON})
 
 # Add source groups in project
 source_group("common" FILES ${SRC_COMMON})
