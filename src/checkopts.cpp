@@ -40,7 +40,8 @@ struct sock_opts {
 	{ "SO_REUSEPORT",		0,			0,				NULL },
 #endif
 	{ "SO_TYPE",			SOL_SOCKET,	SO_TYPE,		sock_str_int },
-	{ "SO_USELOOPBACK",		SOL_SOCKET,	SO_USELOOPBACK,	sock_str_flag },
+	//{ "SO_USELOOPBACK",		SOL_SOCKET,	SO_USELOOPBACK,	sock_str_flag },
+	{ "MCAST_JOIN_GROUP",	SOL_SOCKET,	MCAST_JOIN_GROUP,	sock_str_flag },
 	{ "IP_TOS",				IPPROTO_IP,	IP_TOS,			sock_str_int },
 	{ "IP_TTL",				IPPROTO_IP,	IP_TTL,			sock_str_int },
 #ifdef	IPV6_DONTFRAG
@@ -104,7 +105,7 @@ main(int argc, char **argv)
 			case SOL_SOCKET:
 			case IPPROTO_IP:
 			case IPPROTO_TCP:
-				fd = Socket(AF_INET, SOCK_STREAM, 0);
+				fd = Socket(AF_INET, SOCK_DGRAM, 0);
 				break;
 #ifdef	IPV6
 			case IPPROTO_IPV6:

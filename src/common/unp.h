@@ -18,18 +18,48 @@
 #include <netinet/in.h>     // sockaddr_in{} and other Internet defns
 #include <netinet/tcp.h>    // for TCP_xxx defines
 #include <arpa/inet.h>      // inet(3) functions
+#include <net/if.h>
+#include <net/route.h>
+#include <sys/un.h>
+#include <sys/types.h>
+#include <sys/ioctl.h>
 #include <netdb.h>
 #include <net/if.h>
 #include <string.h>
 #include <strings.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
 #endif
+
+constexpr auto STUN_ADDR = "216.93.246.18";//"208.83.61.2";//"87.239.90.119";//
+constexpr auto STUN_PORT = "3478";
 
 /* Miscellaneous constants */
 #define	MAXLINE		4096	/* max text line length */
 #define	BUFFSIZE	8192	/* buffer size for reads and writes */
 
+/* Following shortens all the typecasts of pointer arguments: */
+#define	SA	struct sockaddr
+
+/* prototypes for our socket wrapper functions: see {Sec errors} */
 int		 Socket(int, int, int);
+void	 Sendto(int, const void *, size_t, int, const SA *, socklen_t);
+ssize_t	 Recvfrom(int, void *, size_t, int, SA *, socklen_t *);
+
+/* prototypes for our stdio wrapper functions: see {Sec errors} */
+char	*Fgets(char *, int, FILE *);
+void	 Fputs(const char *, FILE *);
+
+/* prototypes for our own library wrapper functions */
+int		 Udp_client(const char *, const char *, SA **, socklen_t *);
+char	*Sock_ntop(const SA *, socklen_t);
+char	*Sock_ntop_host(const SA *, socklen_t);
+void	 dg_cli(FILE *, int, const SA *, socklen_t);
+
+/* prototypes for our Unix wrapper functions: see {Sec errors} */
+void	*Malloc(size_t);
 
 void	 err_dump(const char *, ...);
 void	 err_msg(const char *, ...);
